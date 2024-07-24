@@ -1,0 +1,25 @@
+
+.ok-button {
+  background-color: hsl(180, 29%, 50%);
+  color: hsl(180, 52%, 96%);
+  border: none;
+  cursor: pointer;
+}
+
+.ok-button:hover {
+  background-color: hsl(180, 29%, 60%) !important;
+  color: hsl(180, 14%, 20%) !important;
+}
+
+.cancel-button {
+  background-color: hsl(180, 29%, 50%);
+  color: hsl(180, 52%, 96%);
+  border: none;
+  cursor: pointer;
+}
+
+.cancel-button:hover {
+  background-color: hsl(180, 29%, 60%) !important; 
+  color: hsl(180, 14%, 20%) !important;
+}
+

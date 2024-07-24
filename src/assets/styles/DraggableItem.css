@@ -1,0 +1,21 @@
+.list-item{
+    padding: 8px;
+    margin: 4px;
+    background-color: #FFFFFF;
+    color: hsl(180, 14%, 20%);
+    cursor: grab;
+    width: 40% !important;
+    max-height: fit-content;
+}
+.item-delete-btn{
+    color: hsl(180, 29%, 50%);
+    border: none;
+    float: right;
+}
+.item-delete-btn:active{
+    color: hsl(180, 14%, 20%) !important;
+    border-color: hsl(180, 8%, 52%) !important;
+}
+.item-delete-btn:hover{
+    color: hsl(180, 14%, 20%) !important;
+}

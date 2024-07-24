@@ -1,70 +1,143 @@
-# Getting Started with Create React App
+# Implementation Notes  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## simulated recieving json data from API using json file 
 
-## Available Scripts
+### MainContainer.jsx
+```   
+   const { data, loading, error } = useFetch("/data.json"); 
 
-In the project directory, you can run:
+```
+### useFetch.jsx
 
-### `npm start`
+```     
+const useFetch = (url) => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url);
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+    fetchData();
+  }, [url]);
 
-### `npm test`
+  return { data, loading, error };
+};
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
 
-### `npm run build`
+## simulated sending json data after change order to API by printing the updated json file to console 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Moving item 5 to be at order 4 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Before
+```
+[
+  {
+    "id": 3,
+    "order": 1
+  },
+  {
+    "id": 2,
+    "order": 2
+  },
+  {
+    "id": 1,
+    "order": 3
+  },
+  {
+    "id": 4,
+    "order": 4
+  },
+  {
+    "id": 5,
+    "order": 5
+  },
+  {
+    "id": 6,
+    "order": 6
+  }
+]
+```
+#### After
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+ [
+  {
+    "id": 3,
+    "order": 1
+  },
+  {
+    "id": 2,
+    "order": 2
+  },
+  {
+    "id": 1,
+    "order": 3
+  },
+  {
+    "id": 5,
+    "order": 4
+  },
+  {
+    "id": 4,
+    "order": 5
+  },
+  {
+    "id": 6,
+    "order": 6
+  }
+]
 
-### `npm run eject`
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Provide the ability to add new items
+### The new items appended directly to the list 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### e.g Adding item 7 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+ [
+  {
+    "id": 1,
+    "order": 1
+  },
+  {
+    "id": 2,
+    "order": 2
+  },
+  {
+    "id": 3,
+    "order": 3
+  },
+  {
+    "id": 4,
+    "order": 4
+  },
+  {
+    "id": 5,
+    "order": 5
+  },
+  {
+    "id": 6,
+    "order": 6
+  },
+  {
+    "id": 7,
+    "order": 7
+  }
+]
+```
+## Provide the ability to delete item
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Provide Scroll while darging feature 
